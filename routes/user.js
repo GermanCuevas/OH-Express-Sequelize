@@ -11,13 +11,15 @@ const checkAge = (req, res, next) => {
     next()
 }
 routerUser.post("/", checkAge, async (req, res) => {
-    try {
+    User.create(req.body).then(user => user.toLower()).then(user => res.status(201).send(user)).catch(err => console.log("error in create user, " + err))
+    /* try {
         const user = await User.create(req.body)
+        await user.toLower()
+        console.log(user.toLower);
         res.status(201).send(user)
-
     } catch (err) {
         res.status(500).send("error " + err)
-    }
+    } */
 })
 
 routerUser.get("/", (req, res) => {
@@ -26,9 +28,14 @@ routerUser.get("/", (req, res) => {
     }).catch(err => console.log("Get All, " + err))
 })
 
+routerUser.get("/:email", (req, res) => {
+    User.findByEmail(req.params.email).then(user => {
+        res.send(user)
+    }).catch(err => console.log("error in search by email " + err))
+})
+
 routerUser.put("/:id", (req, res) => {
     const { email } = req.body
-    console.log(email);
     User.update({ email: email }, {
         where: {
             id: req.params.id

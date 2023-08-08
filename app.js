@@ -12,7 +12,7 @@ app.use("/api", router)
 
 
 
-db.sync({ force: true })
+db.sync({ force: false })
     .then(() => {
         console.log("Base de datos sincronizada");
         app.listen(3000, () => {

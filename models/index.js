@@ -1,7 +1,6 @@
 const User = require("./user")
 const Phone = require("./phone")
 
-//Que trabajen==>
-Phone.belongsTo(User, { as: "titular" })
+//Que faltaria para vincular un Phone con un User ?
 
 module.exports = { User, Phone }
