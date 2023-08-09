@@ -10,6 +10,8 @@ const checkAge = (req, res, next) => {
     }
     next()
 }
+
+
 routerUser.post("/", checkAge, async (req, res) => {
     User.create(req.body).then(user => user.toLower()).then(user => res.status(201).send(user)).catch(err => console.log("error in create user, " + err))
     /* try {

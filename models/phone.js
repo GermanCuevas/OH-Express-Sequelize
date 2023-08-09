@@ -26,7 +26,7 @@ Phone.init({
     });
 
 
-//Que laburen===>
+
 Phone.beforeCreate(phone => {
     let imei = Math.floor(Math.random() * 100)
     phone.imei = imei
